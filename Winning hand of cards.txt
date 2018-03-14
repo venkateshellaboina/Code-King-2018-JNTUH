@@ -1,0 +1,25 @@
+
+https://www.hackerrank.com/contests/rookierank-4/challenges/winning-hand-of-cards
+
+
+int winningHands(int m, int x, vector <long long int> a) {
+    for(int i=0;i<31;i++)
+    {
+        for(int j=0;j<1000000;j++)
+            dp[i][j]=0;
+    }
+    dp[0][a[0]%m]=1;
+    for(int i=1;i<a.size();i++)
+    {
+        dp[i][a[i]%m]=1;
+        for(int j=0;j<m;j++)
+        {
+            dp[i][j]+=dp[i-1][j];
+            dp[i][(j*a[i])%m]+=dp[i-1][j];
+        }
+      /*  for(int j=0;j<m;j++)
+            cout << dp[i][j] << " ";
+        cout << endl;*/
+    }
+    return dp[a.size()-1][x];
+}
